@@ -23,7 +23,7 @@ class MyGame:
         sleep(2)
         print('Basically Rock-Paper-Scissors but with more options')
         sleep(2)
-        print('Need to know the (r)ules? Or are you ready to (s)tart? (use "r" and "s" to either see the rules or start the game')
+        print('Need to know the (r)ules? Or are you ready to (s)tart? (use "r" and "s" to either see the rules or start the game)')
         self.rulesChoice = str.lower(input())
 
     def player_one(self):
