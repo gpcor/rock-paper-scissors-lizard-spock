@@ -17,8 +17,8 @@ class MyGame:
         self.new_game_answer = ''
         self.rulesChoice = ''
 
-        print('''
-                                                                        
+    def game_start(self):
+        print('''                                                       
         88888888ba   88888888ba    ad88888ba   88           ad88888ba   
         88      "8b  88      "8b  d8"     "8b  88          d8"     "8b  
         88      ,8P  88      ,8P  Y8,          88          Y8,          
@@ -26,13 +26,8 @@ class MyGame:
         88""""88'    88""""""'      `"""""8b,  88            `"""""8b,  
         88    `8b    88                   `8b  88                  `8b  
         88     `8b   88           Y8a     a8P  88          Y8a     a8P  
-        88      `8b  88            "Y88888P"   88888888888  "Y88888P"   
-                                                                
-                                                                
-        
+        88      `8b  88            "Y88888P"   88888888888  "Y88888P"                                                       
         ''')
-
-    def game_start(self):
 
         print('Welcome to Rock-Paper-Scissors-Lizard-Spock')
         sleep(2)
