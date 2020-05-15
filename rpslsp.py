@@ -14,8 +14,23 @@ class MyGame:
         self.matchScore = {'player': 0, 'computer': 0}
         self.playerThrow = ''
         self.computerThrow = ''
-        self.newGameAnswer = ''
+        self.new_game_answer = ''
         self.rulesChoice = ''
+
+        print('''
+                                                                        
+        88888888ba   88888888ba    ad88888ba   88           ad88888ba   
+        88      "8b  88      "8b  d8"     "8b  88          d8"     "8b  
+        88      ,8P  88      ,8P  Y8,          88          Y8,          
+        88aaaaaa8P'  88aaaaaa8P'  `Y8aaaaa,    88          `Y8aaaaa,    
+        88""""88'    88""""""'      `"""""8b,  88            `"""""8b,  
+        88    `8b    88                   `8b  88                  `8b  
+        88     `8b   88           Y8a     a8P  88          Y8a     a8P  
+        88      `8b  88            "Y88888P"   88888888888  "Y88888P"   
+                                                                
+                                                                
+        
+        ''')
 
     def game_start(self):
 
@@ -26,20 +41,9 @@ class MyGame:
         print('Need to know the (r)ules? Or are you ready to (s)tart? (use "r" and "s" to either see the rules or start the game)')
         self.rulesChoice = str.lower(input())
 
-    def player_one(self):
-
-        print('Make your throw.')
-        self.playerThrow = str.lower(input())
-        return self.playerThrow
-
-    def computer_player(self):
-
-        self.computerThrow = random.choice(self.throwOptions)
-
     def game_rules(self):
 
-        if self.rulesChoice == 'r':
-            print('''
+        game_rules = '''
             # Rock, Paper, Scissors, Lizard, Spock
 
             A game of chance based on the hit TV show Big Bang Theory.
@@ -66,9 +70,18 @@ class MyGame:
             * All players will one make one throw per round
             * The game is Best 3 out of 5 with a maximum of five rounds per Match
             * The first to three points wins the Match
-            ''')
+            '''
+
+        if self.rulesChoice == 'r':
+            print(game_rules)
         else:
             pass
+
+    def make_throws(self):
+
+        print('Make your throw.')
+        self.playerThrow = str.lower(input())
+        self.computerThrow = random.choice(self.throwOptions)
 
     def throw_matchup(self):
 
@@ -166,14 +179,14 @@ class MyGame:
 
         while True:
 
-            self.newGameAnswer = str.lower(input())
-            if self.newGameAnswer == 'yes':
+            self.new_game_answer = str.lower(input())
+            if self.new_game_answer == 'yes':
                 for i in iter(self.scoreboard):
                     self.scoreboard[i] = 0
                 print('Let us begin...')
                 break
 
-            elif self.newGameAnswer != 'yes' and self.newGameAnswer != 'no':
+            elif self.new_game_answer != 'yes' and self.new_game_answer != 'no':
                 print('I prefer yes and no answers only, please and thank you...')
 
             else:
@@ -188,8 +201,7 @@ def main():
 
     while True:
 
-        game.player_one()
-        game.computer_player()
+        game.make_throws()
         game.throw_matchup()
         if game.scoreboard['player'] == 3:
 
@@ -198,8 +210,8 @@ def main():
             print('The current match score is {}'.format(game.matchScore))
             game.new_game_question()
             try:
-                if game.newGameAnswer == 'yes':
-                    game.player_one()
+                if game.new_game_answer == 'yes':
+                    game.make_throws()
                     game.computer_player()
                     game.throw_matchup()
 
@@ -218,10 +230,9 @@ def main():
             print('The current match score is {}'.format(game.matchScore))
             game.new_game_question()
 
-            if game.newGameAnswer == 'yes':
+            if game.new_game_answer == 'yes':
 
-                game.player_one()
-                game.computer_player()
+                game.make_throws()
                 game.throw_matchup()
 
             else:
