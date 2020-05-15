@@ -6,15 +6,19 @@ from time import sleep
 
 class MyGame:
 
-    scoreboard = {'player': 0, 'computer': 0}
-    matchScore = {'player': 0, 'computer': 0}
     throwOptions = ['rock', 'paper', 'scissors', 'lizard', 'spock']
-    playerThrow = ''
-    computerThrow = ''
-    newGameAnswer = ''
-    rulesChoice = ''
 
     def __init__(self):
+
+        self.scoreboard = {'player': 0, 'computer': 0}
+        self.matchScore = {'player': 0, 'computer': 0}
+        self.playerThrow = ''
+        self.computerThrow = ''
+        self.newGameAnswer = ''
+        self.rulesChoice = ''
+
+    def game_start(self):
+
         print('Welcome to Rock-Paper-Scissors-Lizard-Spock')
         sleep(2)
         print('Basically Rock-Paper-Scissors but with more options')
@@ -26,6 +30,7 @@ class MyGame:
 
         print('Make your throw.')
         self.playerThrow = str.lower(input())
+        return self.playerThrow
 
     def computer_player(self):
 
@@ -178,6 +183,7 @@ class MyGame:
 def main():
 
     game = MyGame()
+    game.game_start()
     game.game_rules()
 
     while True:
