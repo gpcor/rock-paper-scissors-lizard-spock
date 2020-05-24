@@ -5,7 +5,6 @@ from time import sleep
 
 
 class MyGame:
-
     throwOptions = ['rock', 'paper', 'scissors', 'lizard', 'spock']
 
     def __init__(self):
@@ -33,7 +32,9 @@ class MyGame:
         sleep(2)
         print('Basically Rock-Paper-Scissors but with more options')
         sleep(2)
-        print('Need to know the (r)ules? Or are you ready to (s)tart? (use "r" and "s" to either see the rules or start the game)')
+        print(
+            'Need to know the (r)ules? Or are you ready to (s)tart? (use "r" and "s" to either see the rules or start '
+            'the game)')
         self.rulesChoice = str.lower(input())
 
     def game_rules(self):
@@ -78,7 +79,7 @@ class MyGame:
         self.playerThrow = str.lower(input())
         self.computerThrow = random.choice(self.throwOptions)
 
-    def throw_matchup(self):
+    def throw_match_up(self):
 
         if self.playerThrow == 'rock':
 
@@ -189,7 +190,6 @@ class MyGame:
 
 
 def main():
-
     game = MyGame()
     game.game_start()
     game.game_rules()
@@ -197,7 +197,7 @@ def main():
     while True:
 
         game.make_throws()
-        game.throw_matchup()
+        game.throw_match_up()
         if game.scoreboard['player'] == 3:
 
             print('You win!')
@@ -207,8 +207,7 @@ def main():
             try:
                 if game.new_game_answer == 'yes':
                     game.make_throws()
-                    game.computer_player()
-                    game.throw_matchup()
+                    game.throw_match_up()
 
                 else:
                     print('See you later')
@@ -228,7 +227,7 @@ def main():
             if game.new_game_answer == 'yes':
 
                 game.make_throws()
-                game.throw_matchup()
+                game.throw_match_up()
 
             else:
                 break
