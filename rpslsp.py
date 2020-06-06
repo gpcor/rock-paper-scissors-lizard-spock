@@ -202,6 +202,7 @@ class MyGame:
 
 
 def main():
+    '''Assembles game logic and win conditions'''
 
     game = MyGame()
     game.game_start()
