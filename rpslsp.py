@@ -2,6 +2,7 @@
 
 import random
 import sys
+import colorama
 
 from time import sleep
 
@@ -12,7 +13,6 @@ class MyGame:
     throw_options = ['rock', 'paper', 'scissors', 'lizard', 'spock']
 
     def __init__(self):
-
         self.scoreboard = {'player': 0, 'computer': 0}
         self.match_score = {'player': 0, 'computer': 0}
         self.player_throw = ''
@@ -22,7 +22,7 @@ class MyGame:
 
     def game_start(self):
         '''Determines the start of the game and if rules are displayed'''
-        print('''
+        print(colorama.Fore.CYAN, '''
         88888888ba   88888888ba    ad88888ba   88           ad88888ba
         88      "8b  88      "8b  d8"     "8b  88          d8"     "8b
         88      ,8P  88      ,8P  Y8,          88          Y8,
@@ -31,7 +31,7 @@ class MyGame:
         88    `8b    88                   `8b  88                  `8b
         88     `8b   88           Y8a     a8P  88          Y8a     a8P
         88      `8b  88            "Y88888P"   88888888888  "Y88888P"
-        ''')
+        ''', colorama.Style.RESET_ALL)
 
         print('Welcome to Rock-Paper-Scissors-Lizard-Spock')
         sleep(2)
@@ -82,16 +82,14 @@ class MyGame:
     def make_throws(self):
         '''Player inputs their throw and the computer randomly selects its'''
 
-        print('Make your throw.')
+        print('Make your throw: ')
         self.player_throw = str.lower(input())
         self.computer_throw = random.choice(self.throw_options)
 
     def throw_match_up(self):
         '''compares throws made by player and pc to see who won the throw'''
-
         if self.player_throw == 'rock':
-
-            if self.computer_throw == 'scissors' or 'lizard':
+            if self.computer_throw == 'scissors' or self.computer_throw == 'lizard':
                 print('{} trumps {}, you win the round!'.format(
                     self.player_throw, self.computer_throw))
                 self.scoreboard['player'] += 1
@@ -108,7 +106,7 @@ class MyGame:
 
         elif self.player_throw == 'paper':
 
-            if self.computer_throw == 'rock' or 'spock':
+            if self.computer_throw == 'rock' or self.computer_throw == 'spock':
                 print('{} trumps {}, you win the round!'.format(
                     self.player_throw, self.computer_throw))
                 self.scoreboard['player'] += 1
@@ -125,7 +123,7 @@ class MyGame:
 
         elif self.player_throw == 'scissors':
 
-            if self.computer_throw == 'paper' or 'lizard':
+            if self.computer_throw == 'paper' or self.computer_throw == 'lizard':
                 print('{} trumps {}, you win the round!'.format(
                     self.player_throw, self.computer_throw))
                 self.scoreboard['player'] += 1
@@ -142,7 +140,7 @@ class MyGame:
 
         elif self.player_throw == 'lizard':
 
-            if self.computer_throw == 'paper' or 'spock':
+            if self.computer_throw == 'paper' or self.computer_throw == 'spock':
                 print('{} trumps {}, you win the round!'.format(
                     self.player_throw, self.computer_throw))
                 self.scoreboard['player'] += 1
@@ -159,7 +157,7 @@ class MyGame:
 
         elif self.player_throw == 'spock':
 
-            if self.computer_throw == 'rock' or 'scissors':
+            if self.computer_throw == 'rock' or self.computer_throw == 'scissors':
                 print('{} trumps {}, you win the round!'.format(
                     self.player_throw, self.computer_throw))
                 self.scoreboard['player'] += 1
@@ -184,24 +182,24 @@ class MyGame:
 
         while True:
 
-            self.new_game_answer = str.lower(input())
+            self.new_game_answer = input()
 
             if self.new_game_answer != 'yes' or 'no':
-                print('''I prefer yes and no answers only,
-                please and thank you...''')
+                print('I prefer yes and no answers only, please.')
 
             elif self.new_game_answer == 'yes':
-
                 for i in iter(self.scoreboard):
                     self.scoreboard[i] = 0
                 print('Let us begin...')
                 break
 
-            else:
+            elif self.new_game_answer == 'no':
                 break
 
 
 def main():
+
+    colorama.init()
     '''Assembles game logic and win conditions'''
 
     game = MyGame()
@@ -218,18 +216,17 @@ def main():
             game.match_score['player'] += 1
             print('The current match score is {}'.format(game.match_score))
             game.new_game_question()
-            try:
-                if game.new_game_answer == 'yes':
-                    game.make_throws()
-                    game.throw_match_up()
+            if game.new_game_answer == 'yes':
+                game.make_throws()
+                game.throw_match_up()
 
-                else:
-                    print('See you later')
-                    sys.exit()
-            except KeyboardInterrupt:
-                if KeyboardInterrupt is True:
-                    print('How abruptly rude...')
-                    sys.exit()
+            elif KeyboardInterrupt:
+                print('How abruptly rude...')
+                sys.exit()
+
+            else:
+                print('See you later')
+                sys.exit()
 
         elif game.scoreboard['computer'] == 3:
 
