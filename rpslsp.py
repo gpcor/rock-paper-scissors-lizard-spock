@@ -2,9 +2,9 @@
 
 import random
 import sys
-import colorama
 
 from time import sleep
+import colorama
 
 
 class MyGame:
@@ -74,7 +74,7 @@ class MyGame:
             * The first to three points wins the Match
             '''
 
-        if self.rules_choice == str.lower('r'):
+        if self.rules_choice.lower() == 'r':
             print(game_rules)
         else:
             pass
@@ -179,28 +179,12 @@ class MyGame:
         '''Determines if a new game will be played or not'''
 
         print('Thanks for playing! Wanna go again? ')
-
-        while True:
-
-            self.new_game_answer = input()
-
-            if self.new_game_answer != 'yes' or 'no':
-                print('I prefer yes and no answers only, please.')
-
-            elif self.new_game_answer == 'yes':
-                for i in iter(self.scoreboard):
-                    self.scoreboard[i] = 0
-                print('Let us begin...')
-                break
-
-            elif self.new_game_answer == 'no':
-                break
+        self.new_game_answer = input()
 
 
 def main():
 
     colorama.init()
-    '''Assembles game logic and win conditions'''
 
     game = MyGame()
     game.game_start()
@@ -216,16 +200,23 @@ def main():
             game.match_score['player'] += 1
             print('The current match score is {}'.format(game.match_score))
             game.new_game_question()
-            if game.new_game_answer == 'yes':
-                game.make_throws()
-                game.throw_match_up()
+            try:
+                while True:
+                    if game.new_game_answer == 'yes':
+                        print('Let us begin!')
+                        for i in iter(game.scoreboard):
+                            game.scoreboard[i] = 0
 
-            elif KeyboardInterrupt:
-                print('How abruptly rude...')
-                sys.exit()
+                        game.make_throws()
+                        game.throw_match_up()
 
-            else:
-                print('See you later')
+                    elif game.new_game_answer == 'no':
+                        print('See you later')
+                        sys.exit()
+                    else:
+                        print('I need a valid answer')
+            except KeyboardInterrupt():
+                print('How rude...')
                 sys.exit()
 
         elif game.scoreboard['computer'] == 3:
@@ -236,6 +227,9 @@ def main():
             game.new_game_question()
 
             if game.new_game_answer == 'yes':
+                print('Let us begin!')
+                for i in iter(game.scoreboard):
+                    game.scoreboard[i] = 0
 
                 game.make_throws()
                 game.throw_match_up()
